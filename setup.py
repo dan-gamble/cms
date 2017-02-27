@@ -7,7 +7,7 @@ from setuptools import setup, find_packages
 
 
 DEPENDENCIES = [
-    'django>=1.8,<1.9',
+    'django==1.11b1',
     'Pillow',
     'sorl-thumbnail',
     'requests',
@@ -41,8 +41,8 @@ setup(
             # Project template
             'Pillow',
             'django-jinja==2.2.1',
-            'django-reversion==1.8.7',
-            'django-watson==1.1.9',
+            # 'django-reversion==1.11b1',
+            # 'django-watson==1.1.9',
             # / Project template
             'coveralls',
             'mock',
