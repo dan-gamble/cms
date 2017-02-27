@@ -351,8 +351,8 @@ class Page(PageBase):
 
     def last_modified(self):
         if externals.reversion:
-            import reversion
-            versions = reversion.get_for_object(self)
+            from reversion.models import Version
+            versions = Version.objects.get_for_object(self)
             if versions.count() > 0:
                 latest_version = versions[:1][0]
                 return "{} by {}".format(

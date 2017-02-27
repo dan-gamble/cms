@@ -41,7 +41,7 @@ setup(
             # Project template
             'Pillow',
             'django-jinja==2.2.1',
-            # 'django-reversion==1.11b1',
+            'django-reversion==2.0.8',
             # 'django-watson==1.1.9',
             # / Project template
             'coveralls',

@@ -74,8 +74,8 @@ class SearchMetaBaseAdmin(OnlineBaseAdmin):
 
 
 if externals.reversion:
-    class SearchMetaBaseAdmin(SearchMetaBaseAdmin, externals.reversion["admin.VersionMetaAdmin"]):
-        list_display = SearchMetaBaseAdmin.list_display + ("get_date_modified",)
+    class SearchMetaBaseAdmin(SearchMetaBaseAdmin, externals.reversion["admin.VersionAdmin"]):
+        pass
 
 
 if externals.watson:

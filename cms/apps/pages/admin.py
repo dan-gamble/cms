@@ -100,18 +100,18 @@ class PageAdmin(PageBaseAdmin):
             return None
 
     def _register_page_inline(self, model):
-        """Registeres the given page inline with reversion."""
+        """Registers the given page inline with reversion."""
         if externals.reversion:
-            self._autoregister(model, follow=["page"])
-            adapter = self.revision_manager.get_adapter(Page)
-            try:
-                adapter.follow = tuple(adapter.follow) + (model._meta.get_field("page").related.get_accessor_name(),)
-                adapter.follow = tuple(name for name in adapter.follow if name != '+')
-            except:
-                pass
+            self._reversion_autoregister(model, follow=["page"])
+            # adapter = self.revision_manager.get_adapter(Page)
+            # try:
+            #     adapter.follow = tuple(adapter.follow) + (model._meta.get_field("page").related.get_accessor_name(),)
+            #     adapter.follow = tuple(name for name in adapter.follow if name != '+')
+            # except:
+            #     pass
 
     def __init__(self, *args, **kwargs):
-        """Initialzies the PageAdmin."""
+        """Initializes the PageAdmin."""
         super(PageAdmin, self).__init__(*args, **kwargs)
         # Patch the admin class's index template.
         self.admin_site.index_template = "admin/pages/dashboard.html"
