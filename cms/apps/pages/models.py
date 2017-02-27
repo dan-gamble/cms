@@ -1,19 +1,17 @@
 """Core models used by the CMS."""
 from __future__ import unicode_literals
 
+from cms import sitemaps, externals
+from cms.models import PageBase, OnlineBaseManager, PageBaseSearchAdapter
+from cms.models.managers import publication_manager
 from django.apps import apps
-
 from django.contrib.contenttypes.models import ContentType
 from django.core import urlresolvers
 from django.db import models, connection, transaction
 from django.db.models import Q, F
+from django.utils import timezone
 from django.utils.encoding import force_text, python_2_unicode_compatible
 from django.utils.functional import cached_property
-from django.utils import timezone
-
-from cms import sitemaps, externals
-from cms.models import PageBase, OnlineBaseManager, PageBaseSearchAdapter
-from cms.models.managers import publication_manager
 
 
 class PageManager(OnlineBaseManager):
@@ -417,9 +415,6 @@ class PageSearchAdapter(PageBaseSearchAdapter):
         qs = filter_indexable_pages(qs)
         # All done!
         return qs
-
-
-externals.watson("register", Page, adapter_cls=PageSearchAdapter)
 
 
 # Base content class.

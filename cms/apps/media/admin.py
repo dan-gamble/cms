@@ -7,7 +7,7 @@ from functools import partial
 from django.core.files import File as DjangoFile
 from django.core.files.temp import NamedTemporaryFile
 from django.core.paginator import Paginator
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from django.contrib import admin, messages
 from django.contrib.admin.views.main import IS_POPUP_VAR
 from django.contrib.staticfiles.storage import staticfiles_storage
@@ -237,19 +237,12 @@ class FileAdminBase(admin.ModelAdmin):
 
     # Create a URL route and a view for saving the Adobe SDK callback URL.
     def get_urls(self):
-        urls = super(FileAdminBase, self).get_urls()
-
-        new_urls = patterns(
-            '',
+        return [
             url(r'^(?P<object_id>\d+)/remote/$', self.remote_view, name="media_file_remote"),
-
             url(r'^redactor/upload/(?P<file_type>image|file)/$', self.redactor_upload, name="media_file_redactor_upload"),
-
             url(r'^redactor/(?P<file_type>images|files)/$', self.redactor_data, name="media_file_redactor_data"),
             url(r'^redactor/(?P<file_type>images|files)/(?P<page>\d+)/$', self.redactor_data, name="media_file_redactor_data"),
-        )
-
-        return new_urls + urls
+        ] + super(FileAdminBase, self).get_urls()
 
     def remote_view(self, request, object_id):
         if not self.has_change_permission(request):
